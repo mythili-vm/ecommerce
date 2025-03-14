@@ -13,7 +13,7 @@ function App() {
         <Home/>
         </div>
       </ThemeProvider>
-  );
+  )
 }
 
 export default App;

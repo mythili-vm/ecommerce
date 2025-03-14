@@ -16,9 +16,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-5 lg:px-20 h-[70px] border-b">
           <div className="flex items-center gap-9">
             <div className="flex items-center gap-2">
-              <IconButton>
+             {!isLarge && <IconButton>
                 <MenuIcon />
-              </IconButton>
+              </IconButton>}
               <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-color">
                 Magizh Tech
               </h1>
