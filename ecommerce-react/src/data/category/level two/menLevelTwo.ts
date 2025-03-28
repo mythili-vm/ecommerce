@@ -1,0 +1,29 @@
+export const menLevelTwo = [
+    {
+        "name":"Topware",
+        "categoryId":"men_topwear",
+        "parentCategoryId":"men",
+        "level":3,
+    },{
+        "name":"Bottomware",
+        "categoryId":"men_bottomwear",
+        "parentCategoryId":"men",
+        "level":3,
+    },{
+        "name":"Innerware And Sleepware",
+        "categoryId":"men_innerware_and_sleepware",
+        "parentCategoryId":"men",
+        "level":3,  
+    },{
+        "name":"Footware",
+        "categoryId":"men_footware",   
+        "parentCategoryId":"men",
+        "level":3,
+    }
+    ,{
+        "name":"Accessories",
+        "categoryId":"men_accessories",
+        "parentCategoryId":"men",
+        "level":3,
+    }
+]
