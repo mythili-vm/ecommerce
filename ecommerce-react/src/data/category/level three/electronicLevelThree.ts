@@ -1,0 +1,23 @@
+export const electronicsLevelThree = [
+    {
+        "name":"Mobiles",
+        "categoryId":"mobiles",
+        "parentCategoryId":"electronics",
+        "parentCategoryName":"electronics",
+    },{
+        "name":"Laptops",
+        "categoryId":"laptops",
+        "parentCategoryId":"electronics",
+        "parentCategoryName":"electronics",
+    },{
+        "name":"Tablets",
+        "categoryId":"tablets",
+        "parentCategoryId":"electronics",
+        "parentCategoryName":"electronics",
+    },{
+        "name":"Accessories",
+        "categoryId":"accessories",
+        "parentCategoryId":"electronics",
+        "parentCategoryName":"electronics",
+    }
+]

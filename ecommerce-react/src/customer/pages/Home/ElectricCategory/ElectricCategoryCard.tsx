@@ -1,11 +1,12 @@
 import React from 'react'
+import { HomeCategory } from '../../../../types/HomeCategoryTypes'
 
-const ElectricCategoryCard = () => {
+const ElectricCategoryCard = ({item}:{item:HomeCategory}) => {
   return (
     <div>
-         <img  className='object-contain h-10' src='https://m.media-amazon.com/images/I/61Qe0euJJZL.jpg'
+         <img  className='object-contain h-10' src={item.image}
         alt=''/>
-        <h2 className='font-semibold test-sm'>Laptop</h2>
+        <h2 className='font-semibold test-sm text-center'>{item.name}</h2>
     </div>
   )
 }

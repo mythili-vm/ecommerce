@@ -1,4 +1,3 @@
-import React from "react";
 import ElectricCategory from "./ElectricCategory/ElectricCategory";
 import CategoryGrid from "./CategoryGrid/CategoryGrid";
 import Deal from "./Deal/Deal";

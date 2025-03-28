@@ -1,0 +1,23 @@
+export const electronicsLevelTwo = [
+    {
+        "name":"Mobiles",
+        "categoryId":"mobiles",
+        "parentCategoryId":"electronics",
+        "level":2,
+    },{
+        "name":"Laptops",
+        "categoryId":"laptops",
+        "parentCategoryId":"electronics",
+        "level":2,
+    },{
+        "name":"Tablets",
+        "categoryId":"tablets",
+        "parentCategoryId":"electronics",
+        "level":2,
+    },{
+        "name":"Accessories",
+        "categoryId":"accessories",
+        "parentCategoryId":"electronics",
+        "level":2,
+    }
+]

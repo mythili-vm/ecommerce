@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DealCard from "./DealCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
+import { useAppSelector } from "../../../../State/Store";
 
 const Deal = () => {
+  const {customer}=useAppSelector(store=>store);
+  
+  useEffect(() => {
+    console.log("deals ",customer.homePageData?.deals);
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -16,8 +22,8 @@ const Deal = () => {
     <div className="py-5 lg:px-20 ">
       <div className="flex items-center justify-between">
         {/* <Slider {...settings}> */}
-          {[1, 1, 1, 1, 1, 1].map((item) => (
-            <DealCard />
+          {customer.homePageData?.deals.slice(0,6).map((item) => (
+            <DealCard key={item.id} item={item} />
           ))}
         {/* </Slider> */}
       </div>
