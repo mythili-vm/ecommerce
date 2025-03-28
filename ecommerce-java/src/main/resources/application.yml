@@ -2,9 +2,9 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://db_postgres_sql:5432/ecommerce
-    username: postgres
-    password: mysecretpassword
+    url: jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:6543/ecommerce
+    username: postgres.iiusszgblienvetvjlat
+    password: 06IhUDjEXsJtR177
     driver-class-name: org.postgresql.Driver
   application:
     name: Ecommerce
