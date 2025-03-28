@@ -16,14 +16,14 @@ public class HomeCategoryController {
     private final HomeCategoryService homeCategoryService;
     private final HomeService homeService;
 
-    @PostMapping("/home/categories")
+    @PostMapping("/home-categories")
     public ResponseEntity<Home> createHomeCategories(@RequestBody List<HomeCategory> homeCategoryList) {
         List<HomeCategory> categories = homeCategoryService.createCategories(homeCategoryList);
         Home home = homeService.createHomePage(categories);
         return ResponseEntity.ok(home);
     }
 
-    @GetMapping("/admin/home-category/{id}")
+    @GetMapping("/admin/home-category")
     public ResponseEntity<List<HomeCategory>> getHomeCategory() {
         List<HomeCategory> categories = homeCategoryService.getAllHomeCategories();
         return ResponseEntity.ok(categories);

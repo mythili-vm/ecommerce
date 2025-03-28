@@ -18,6 +18,7 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -31,7 +32,12 @@ public class PaymentServiceImpl implements PaymentService {
 
     private String apiKey = "apikey";
     private String apiSecret = "apisecret";
-    private String stripeApiSecret = "apisecret";
+
+    @Value("${magizh.stripe.secret.key}")
+    private String stripeApiSecret;
+
+    @Value("${magizh.hostname}")
+    private String hostName;
 
     @Override
     public PaymentOrder createOrder(User user, Set<Order> orders) {
@@ -94,8 +100,8 @@ public class PaymentServiceImpl implements PaymentService {
         notify.put("email", true);
         paymentLinkRequest.put("notify", notify);
 
-
-        paymentLinkRequest.put("callback_url", "http://localhost:3000/payment-success/" + orderId);
+        String url=hostName+"/payment-success/";
+        paymentLinkRequest.put("callback_url", url + orderId);
         paymentLinkRequest.put("callback_method", "get");
         return razorpayClient.paymentLink.create(paymentLinkRequest);
     }
@@ -103,7 +109,19 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public String createStripePaymentLink(User user, Long amount, Long orderId) throws StripeException {
         Stripe.apiKey = stripeApiSecret;
-        SessionCreateParams params = SessionCreateParams.builder().addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD).setMode(SessionCreateParams.Mode.PAYMENT).setSuccessUrl("http://localhost:3000/payment-success/" + orderId).setCancelUrl("http://localhost:3000/payment-cance/").addLineItem(SessionCreateParams.LineItem.builder().setQuantity(1L).setPriceData(SessionCreateParams.LineItem.PriceData.builder().setCurrency("usd").setUnitAmount(amount * 100).setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder().setName("Magizh Bazaar Payment").build()).build()).build()).build();
+        String paymentSuccess=hostName+"/payment-success/";
+        String paymentCancel=hostName+"/payment-cancel/";
+        SessionCreateParams params = SessionCreateParams.builder()
+                .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+                .setMode(SessionCreateParams.Mode.PAYMENT)
+                .setSuccessUrl(paymentSuccess + orderId)
+                .setCancelUrl(paymentCancel)
+                .addLineItem(SessionCreateParams.LineItem.builder().setQuantity(1L)
+                        .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                .setCurrency("usd")
+                                .setUnitAmount(amount * 100)
+                                .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                        .setName("Magizh Bazaar Payment").build()).build()).build()).build();
         Session session = Session.create(params);
         return session.getUrl();
     }

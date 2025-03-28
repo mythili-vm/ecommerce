@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/deals")
@@ -24,7 +26,7 @@ public class DealController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Deal> createDeals(
+    public ResponseEntity<Deal> updateDeals(
             @PathVariable Long id,
             @RequestBody Deal deal
     ) throws Exception {
@@ -32,7 +34,7 @@ public class DealController {
         return ResponseEntity.ok(updatedDeal);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteDeal(
             @PathVariable Long id
     ) throws Exception {
@@ -40,5 +42,12 @@ public class DealController {
         return ResponseEntity.ok(new ApiResponse("Deal deleted!"));
     }
 
+
+    @GetMapping
+    public ResponseEntity<List<Deal>> getDeals(){
+        List<Deal> deals=dealService.getDeals();
+        return ResponseEntity.ok(deals);
+
+    }
 
 }

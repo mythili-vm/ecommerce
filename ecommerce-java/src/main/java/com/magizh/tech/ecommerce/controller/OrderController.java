@@ -28,7 +28,10 @@ public class OrderController {
     private final SellerReportService sellerReportService;
     private final PaymentOrderRepository paymentOrderRepository;
 
-    public ResponseEntity<PaymentLinkResponse> createOrderHandler(@RequestBody Address shippingAddress, @RequestParam PaymentMethod paymentMethod, @RequestHeader("Authorization") String jwt) throws Exception {
+    @PostMapping
+    public ResponseEntity<PaymentLinkResponse> createOrderHandler(@RequestBody Address shippingAddress,
+                                                                  @RequestParam PaymentMethod paymentMethod,
+                                                                  @RequestHeader("Authorization") String jwt) throws Exception {
 
         User user = userService.findUserByJwtToken(jwt);
         Cart cart = cartService.findUserCart(user);

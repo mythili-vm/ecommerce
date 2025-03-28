@@ -1,5 +1,7 @@
 package com.magizh.tech.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.magizh.tech.ecommerce.enums.AccountStatus;
 import com.magizh.tech.ecommerce.enums.USER_ROLE;
 import com.magizh.tech.ecommerce.model.BankDetails;
@@ -25,6 +27,8 @@ public class Seller {
     @Column(unique = true,nullable = false)
     private  String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private String password;
 
     @Embedded

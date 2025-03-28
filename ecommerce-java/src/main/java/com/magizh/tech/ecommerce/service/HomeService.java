@@ -8,4 +8,6 @@ import java.util.List;
 public interface HomeService {
 
     Home createHomePage(List<HomeCategory> allCategories);
+
+    Home getHomeCategories(List<HomeCategory> categories);
 }

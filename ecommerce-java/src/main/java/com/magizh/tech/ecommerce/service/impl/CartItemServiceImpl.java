@@ -5,18 +5,20 @@ import com.magizh.tech.ecommerce.entity.User;
 import com.magizh.tech.ecommerce.repos.CartItemRepository;
 import com.magizh.tech.ecommerce.service.CartItemService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+@Log4j2
 public class CartItemServiceImpl implements CartItemService {
 
-    private CartItemRepository cartItemRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Override
     public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws Exception {
-
-        CartItem item = findCartItem(userId);
+       log.info("cart item id {}",id);
+        CartItem item = findCartItem(id);
         User cartItemUser = item.getCart().getUser();
         if (cartItemUser.getId().equals(userId)) {
             item.setQuantity(cartItem.getQuantity());

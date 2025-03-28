@@ -48,6 +48,7 @@ public class ProductServiceImpl implements ProductService {
             Category category = new Category();
             category.setCategoryId(req.getCategory2());
             category.setLevel(2);
+            category.setParentCategory(category1.get());
             category2 = Optional.of(categoryRepository.saveAndFlush(category));
         }
 
@@ -57,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
             Category category = new Category();
             category.setCategoryId(req.getCategory3());
             category.setLevel(3);
+            category.setParentCategory(category2.get());
             category3 = Optional.of(categoryRepository.saveAndFlush(category));
         }
 
@@ -107,7 +109,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> searchProducts(String query) {
-        return productRepository.searchProduct(query);
+        if(!isNull(query)) {
+            return productRepository.searchProduct(query);
+        }else{
+            return productRepository.findAll();
+        }
     }
 
     @Override
@@ -152,7 +158,7 @@ public class ProductServiceImpl implements ProductService {
 
         };
         Pageable pageable;
-        if (isNull(sort) && !sort.isEmpty()) {
+        if (!isNull(sort) && !sort.isEmpty()) {
             switch (sort) {
                 case "price_low":
                     pageable = PageRequest.of(!isNull(pageNumber) ? pageNumber : 0, 10, Sort.by("sellingPrice").ascending());

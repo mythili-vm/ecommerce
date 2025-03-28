@@ -7,9 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-
-import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +15,9 @@ public class HomeCategoryServiceImpl implements HomeCategoryService {
     private final HomeCategoryRepository homeCategoryRepository;
 
     @Override
-    public HomeCategory createHomeCategory(HomeCategory homeCategory) {
-        return homeCategoryRepository.saveAndFlush(homeCategory);
+    public List<HomeCategory> createHomeCategory(List<HomeCategory> homeCategory) {
+        homeCategoryRepository.saveAll(homeCategory);
+        return homeCategoryRepository.findAll();
     }
 
     @Override
@@ -34,12 +32,8 @@ public class HomeCategoryServiceImpl implements HomeCategoryService {
     public HomeCategory updateHomeCategory(HomeCategory homeCategory, Long id) throws Exception {
         HomeCategory existingCategory = homeCategoryRepository.findById(id)
                 .orElseThrow(() -> new Exception("Category not found"));
-        if (!isNull(homeCategory.getImage())) {
-            existingCategory.setImage(homeCategory.getImage());
-        }
-        if (!isNull(homeCategory.getCategoryId())) {
-            existingCategory.setCategoryId(homeCategory.getCategoryId());
-        }
+        existingCategory.setProduct(homeCategory.getProduct());
+        existingCategory.setSection(homeCategory.getSection());
         return homeCategoryRepository.saveAndFlush(existingCategory);
     }
 

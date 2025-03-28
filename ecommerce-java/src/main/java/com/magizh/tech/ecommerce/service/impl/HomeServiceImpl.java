@@ -43,4 +43,23 @@ public class HomeServiceImpl implements HomeService {
         home.setDealCategories(dealCategories);
         return home;
     }
+
+    @Override
+    public Home getHomeCategories(List<HomeCategory> allCategories) {
+        List<HomeCategory> gridCategories = allCategories.stream().filter(homeCategory -> homeCategory.getSection() == HomeCategorySection.GRID).toList();
+
+        List<HomeCategory> shopByCategories = allCategories.stream().filter(homeCategory -> homeCategory.getSection() == HomeCategorySection.SHOP_BY_CATEGORIES).toList();
+
+        List<HomeCategory> electricCategories = allCategories.stream().filter(homeCategory -> homeCategory.getSection() == HomeCategorySection.ELECTRIC_CATEGORIES).toList();
+
+        List<HomeCategory> dealCategories = allCategories.stream().filter(homeCategory -> homeCategory.getSection() == HomeCategorySection.DEALS).toList();
+        List<Deal> createdDeals = dealRepository.findAll();
+        Home home = new Home();
+        home.setGrid(gridCategories);
+        home.setShopByCategories(shopByCategories);
+        home.setElectricCategories(electricCategories);
+        home.setDeals(createdDeals);
+        home.setDealCategories(dealCategories);
+        return home;
+    }
 }

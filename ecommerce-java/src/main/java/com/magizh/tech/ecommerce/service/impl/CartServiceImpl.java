@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
             cartItem.setSellingPrice(totalPrice);
 
             cart.getCartItems().add(cartItem);
-            cartItem.setMrpPrice(quantity*product.getMrpPrice());
+            cartItem.setMrpPrice(quantity * product.getMrpPrice());
             cartItem.setCart(cart);
             return cartItemRepository.saveAndFlush(cartItem);
         }
@@ -49,16 +49,17 @@ public class CartServiceImpl implements CartService {
         int totalDiscountedPrice = 0;
         int totalItem = 0;
 
-
-        for (CartItem cartItem : cart.getCartItems()) {
-            totalPrice += cartItem.getMrpPrice();
-            totalDiscountedPrice += cartItem.getSellingPrice();
-            totalItem += cartItem.getQuantity();
+        if (!isNull(cart) && !isNull(cart.getCartItems())) {
+            for (CartItem cartItem : cart.getCartItems()) {
+                totalPrice += cartItem.getMrpPrice();
+                totalDiscountedPrice += cartItem.getSellingPrice();
+                totalItem += cartItem.getQuantity();
+            }
+            cart.setTotalMrpPrice(totalPrice);
+            cart.setTotalSellingPrice(totalDiscountedPrice);
+            cart.setDiscount(calculateDiscountPercentage(totalPrice, totalDiscountedPrice));
+            cart.setTotalItem(totalItem);
         }
-        cart.setTotalMrpPrice(totalPrice);
-        cart.setTotalSellingPrice(totalDiscountedPrice);
-        cart.setDiscount(calculateDiscountPercentage(totalPrice, totalDiscountedPrice));
-        cart.setTotalItem(totalItem);
         return cart;
     }
 

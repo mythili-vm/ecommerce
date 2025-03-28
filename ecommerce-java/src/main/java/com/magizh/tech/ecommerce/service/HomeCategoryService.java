@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface HomeCategoryService {
 
-    HomeCategory createHomeCategory(HomeCategory homeCategory);
+    List<HomeCategory> createHomeCategory(List<HomeCategory> homeCategory);
 
     List<HomeCategory> createCategories(List<HomeCategory> homeCategoryList);
 

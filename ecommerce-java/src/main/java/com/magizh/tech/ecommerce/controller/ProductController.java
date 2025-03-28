@@ -24,8 +24,8 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/{search}")
-    public ResponseEntity<List<Product>> searchProduct(@RequestParam(required = false) String query) throws ProductException {
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestParam(required = false) String query) {
         List<Product> product = productService.searchProducts(query);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
