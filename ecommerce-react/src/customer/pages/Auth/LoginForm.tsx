@@ -14,17 +14,16 @@ const LoginForm = () => {
       email: "",
       otp: "",
     },
-    onSubmit: (values) => {
-      console.log("form data", values);
-      dispatch(signin(values)).then((res) => {
+    onSubmit: async (values) => {
+      try {
+        const res = await dispatch(signin(values)).unwrap(); // throws if rejected
         navigate("/");
-      });
+      } catch (err: any) {
+        alert(err || "Failed to sign in");
+      }
     },
   });
 
-useEffect(() => {
-  console.log("auth is",auth);
-},[])
 
   const handleSendOtp = () => {
     dispatch(sendLoginSignupOtp({ email: formik.values.email }));
@@ -91,3 +90,4 @@ useEffect(() => {
 };
 
 export default LoginForm;
+
