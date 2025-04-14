@@ -2,12 +2,10 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:6543/ecommerce
-    username: postgres.iiusszgblienvetvjlat
-    password: 06IhUDjEXsJtR177
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
-  application:
-    name: Ecommerce
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,4 +26,3 @@ magizh:
   stripe:
     secret:
       key: sk_test_51R6ZEGAcT2a2ILFxbzMMo7RQHg0HhjoUivuHJ52Ud8Ff6asAdxtzEzv66KeQLj2rNG9hoxGjsBebOxHTHcyZixUv00hJkvc8Sd
-

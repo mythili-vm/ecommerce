@@ -18,6 +18,8 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+    ports:
+      - 5433:5432
     env_file:
       - .env
     environment:
@@ -28,6 +30,8 @@ services:
     volumes:
       - ../../pg_data:/var/lib/postgresql/data
   project:
+    depends_on:
+       - db_postgres_sql
     hostname: ecommerce
     image: magizhecommerce
     logging:
@@ -41,6 +45,8 @@ services:
         condition: on-failure
     networks:
       - magizh
+    env_file:
+      - .env
     volumes:
       - ../../logs:/home/logs
     ports:
