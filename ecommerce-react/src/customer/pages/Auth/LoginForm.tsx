@@ -14,12 +14,13 @@ const LoginForm = () => {
       email: "",
       otp: "",
     },
-    onSubmit: (values) => {
-      dispatch(signin(values)).then((res) => {
+    onSubmit: async (values) => {
+      try {
+        const res = await dispatch(signin(values)).unwrap(); // throws if rejected
         navigate("/");
-      }).catch((err) => {
-        return rejectWithValue(err.response?.data?.message || "Failed to send OTP");
-      });
+      } catch (err: any) {
+        alert(err || "Failed to sign in");
+      }
     },
   });
 
@@ -89,7 +90,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-function rejectWithValue(arg0: any): any {
-  throw new Error("Function not implemented.");
-}
 
