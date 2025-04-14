@@ -15,16 +15,14 @@ const LoginForm = () => {
       otp: "",
     },
     onSubmit: (values) => {
-      console.log("form data", values);
       dispatch(signin(values)).then((res) => {
         navigate("/");
+      }).catch((err) => {
+        return rejectWithValue(err.response?.data?.message || "Failed to send OTP");
       });
     },
   });
 
-useEffect(() => {
-  console.log("auth is",auth);
-},[])
 
   const handleSendOtp = () => {
     dispatch(sendLoginSignupOtp({ email: formik.values.email }));
@@ -91,3 +89,7 @@ useEffect(() => {
 };
 
 export default LoginForm;
+function rejectWithValue(arg0: any): any {
+  throw new Error("Function not implemented.");
+}
+
